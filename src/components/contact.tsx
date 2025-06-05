@@ -103,7 +103,7 @@ export default function Contact() {
 
           <Card className="card-gradient border-slate-600 animate-slide-up">
             <CardContent className="p-8">
-              <form action="https://formspree.io/f/xpwqbaob" method="POST" className="space-y-6">
+              <form action="https://formspree.io/f/xzzgzypp" method="POST" className="space-y-6">
                 <div>
                   <Label htmlFor="name" className="text-sm font-medium mb-2 block">
                     Name
