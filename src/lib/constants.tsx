@@ -2,8 +2,8 @@ import project1 from "../assets/Project1.png"
 import project2 from "../assets/Project2.png"
 import project3 from "../assets/Project3.png"
 import project4 from "../assets/Project4.png"
-import project5 from "../assets/Project5.png"
-import project6 from "../assets/Project6.png"
+import project5 from "../assets/project5.png"
+import project6 from "../assets/project6.png"
 
 
 export const PROJECTS = [
