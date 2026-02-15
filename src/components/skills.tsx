@@ -1,108 +1,291 @@
-import { Card, CardContent } from "./ui/card";
-import {
-  SiHtml5,
-  SiCss3,
-  SiJavascript,
-  SiReact,
-  SiNodedotjs,
-  SiMongodb,
-  SiExpress,
-  SiGit,
-  SiGithub,
-  SiPostman,
-} from "react-icons/si";
-import { VscCode } from "react-icons/vsc";
+import { motion } from "framer-motion";
+import { SKILLS } from "../lib/constants";
+import { useTheme } from "../lib/theme-context";
+import { SiReact, SiSvelte, SiJavascript, SiTypescript, SiTailwindcss, SiHtml5, SiNodedotjs, SiExpress, SiPostgresql, SiMongodb, SiSupabase, SiPostman, SiGithub, SiServicenow, SiJira, SiGit, SiVmware, SiC } from "react-icons/si";
 
-const frontendSkills = [
-  { name: "HTML5", icon: SiHtml5, color: "text-orange-500" },
-  { name: "CSS3", icon: SiCss3, color: "text-blue-500" },
-  { name: "JavaScript", icon: SiJavascript, color: "text-yellow-500" },
-  { name: "React", icon: SiReact, color: "text-cyan-500" },
-];
-
-const backendSkills = [
-  { name: "MongoDB", icon: SiMongodb, color: "text-green-500" },
-  { name: "Node.js", icon: SiNodedotjs, color: "text-green-600" },
-  { name: "Express", icon: SiExpress, color: "text-white" }
-];
-
-const Tools = [
-  { name: "VS Code", icon: VscCode, color: "text-blue-500" },
-  { name: "Git", icon: SiGit, color: "text-orange-500" },
-  { name: "GitHub", icon: SiGithub, color: "text-white" },
-  { name: "Postman", icon: SiPostman, color: "text-orange-500" },
-];
-
+const skillIcons: Record<string, React.ReactNode> = {
+  "React.js": <SiReact />,
+  "Svelte": <SiSvelte />,
+  "SvelteKit": <SiSvelte />,
+  "JavaScript": <SiJavascript />,
+  "TypeScript": <SiTypescript />,
+  "Tailwind CSS": <SiTailwindcss />,
+  "HTML5": <SiHtml5 />,
+  "Node.js": <SiNodedotjs />,
+  "Express.js": <SiExpress />,
+  "PostgreSQL": <SiPostgresql />,
+  "SQL": <SiPostgresql />,
+  "MongoDB": <SiMongodb />,
+  "Supabase": <SiSupabase />,
+  "Postman": <SiPostman />,
+  "Git": <SiGit />,
+  "GitHub": <SiGithub />,
+  "ServiceNow": <SiServicenow />,
+  "Jira Service Management": <SiJira />,
+  "JIRA": <SiJira />,
+  "VMware": <SiVmware />,
+  "GoHighLevel": <SiGit />,
+  "C": <SiC />,
+};
 
 export default function Skills() {
+  const { theme } = useTheme();
+
+  const SkillIcon = ({ name }: { name: string }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      whileHover={{ scale: 1.1 }}
+      className="flex flex-col items-center gap-2"
+    >
+      <div className={`text-5xl transition-colors ${
+        theme === 'light'
+          ? 'text-slate-700 hover:text-slate-900'
+          : 'text-slate-400 hover:text-slate-200'
+      }`}>
+        {skillIcons[name] || <span>•</span>}
+      </div>
+      <span className={`text-xs font-medium text-center ${
+        theme === 'light'
+          ? 'text-slate-600'
+          : 'text-slate-400'
+      }`}>
+        {name}
+      </span>
+    </motion.div>
+  );
+
   return (
-    <section id="skills" className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16 text-white">
-          Skills
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Frontend & Database Skills */}
-          <Card className="bg-gray-800 border-cyan-500">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-semibold mb-6 text-cyan-400 text-center">
-                Frontend
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {frontendSkills.map((skill, index) => (
-                  <div key={index} className="flex flex-col items-center group">
-                    <skill.icon className={`text-4xl ${skill.color} mb-2 transition-transform group-hover:scale-110`} />
-                    <span className="text-gray-300 text-sm font-medium text-center">
-                      {skill.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Backend & Tools */}
-          <Card className="bg-gray-800 border-cyan-500">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-semibold mb-6 text-cyan-400 text-center">
-                Backend
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {backendSkills.map((skill, index) => (
-                  <div key={index} className="flex flex-col items-center group">
-                    <skill.icon className={`text-4xl ${skill.color} mb-2 transition-transform group-hover:scale-110`} />
-                    <span className="text-gray-300 text-sm font-medium text-center">
-                      {skill.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+    <section id="skills" className={`py-20 relative overflow-hidden ${
+      theme === 'light'
+        ? 'bg-white text-black'
+        : 'bg-black text-white'
+    }`}>
+      {/* Subtle Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-3 ${
+          theme === 'light'
+            ? 'bg-gray-400'
+            : 'bg-gray-600'
+        }`}></div>
+        <div className={`absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-3 ${
+          theme === 'light'
+            ? 'bg-gray-300'
+            : 'bg-gray-700'
+        }`}></div>
       </div>
 
-      <div className="w-5/6 md:w-1/3 mt-12 mx-auto">
-        <Card className="bg-gray-800  border-cyan-500 ">
-          <CardContent className="p-8">
-            <h3 className="text-2xl font-semibold mb-6 text-cyan-400 text-center">
-              Tools
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {Tools.map((skill, index) => (
-                <div key={index} className="flex flex-col items-center group">
-                  <skill.icon className={`text-4xl ${skill.color} mb-2 transition-transform group-hover:scale-110`} />
-                  <span className="text-gray-300 text-sm font-medium text-center">
-                    {skill.name}
-                  </span>
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className={`text-4xl sm:text-5xl font-bold mb-4 ${
+            theme === 'light'
+              ? 'text-slate-900'
+              : 'text-white'
+          }`}>
+            Technical Skills
+          </h2>
+          <div className={`w-24 h-1 mx-auto rounded-full ${
+            theme === 'light'
+              ? 'bg-gray-400'
+              : 'bg-gray-600'
+          }`}></div>
+        </motion.div>
+
+        {/* Languages */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-16"
+        >
+          <h3 className={`text-2xl font-semibold mb-8 ${
+            theme === 'light'
+              ? 'text-slate-800'
+              : 'text-slate-200'
+          }`}>
+            Languages
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+            {SKILLS.languages.map((skill) => (
+              <SkillIcon key={skill.name} name={skill.name} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Frameworks / Libraries */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mb-16"
+        >
+          <h3 className={`text-2xl font-semibold mb-8 ${
+            theme === 'light'
+              ? 'text-slate-800'
+              : 'text-slate-200'
+          }`}>
+            Libraries & Frameworks
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {SKILLS.frameworks.map((skill) => (
+              <SkillIcon key={skill.name} name={skill.name} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Database */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-16"
+        >
+          <h3 className={`text-2xl font-semibold mb-8 ${
+            theme === 'light'
+              ? 'text-slate-800'
+              : 'text-slate-200'
+          }`}>
+            Databases
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {SKILLS.database.map((skill) => (
+              <SkillIcon key={skill.name} name={skill.name} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Platforms */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="mb-16"
+        >
+          <h3 className={`text-2xl font-semibold mb-8 ${
+            theme === 'light'
+              ? 'text-slate-800'
+              : 'text-slate-200'
+          }`}>
+            Platforms & Services
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {SKILLS.platforms.map((platform) => (
+              <motion.div
+                key={platform.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className={`p-6 rounded-lg border ${
+                  theme === 'light'
+                    ? 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                    : 'bg-gray-900/50 border-gray-800 hover:bg-gray-800/50'
+                }`}
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  <div className={`text-4xl ${
+                    theme === 'light'
+                      ? 'text-slate-700'
+                      : 'text-slate-400'
+                  }`}>
+                    {skillIcons[platform.name] || <span>•</span>}
+                  </div>
+                  <div>
+                    <h4 className={`text-lg font-semibold ${
+                      theme === 'light'
+                        ? 'text-slate-800'
+                        : 'text-slate-200'
+                    }`}>
+                      {platform.name}
+                    </h4>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+                <ul className="space-y-2">
+                  {platform.details.map((detail, idx) => (
+                    <li key={idx} className={`text-sm flex items-center gap-2 ${
+                      theme === 'light'
+                        ? 'text-slate-600'
+                        : 'text-slate-400'
+                    }`}>
+                      <span className={`text-lg ${
+                        theme === 'light'
+                          ? 'text-slate-700'
+                          : 'text-slate-400'
+                      }`}>▪</span>
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
+        {/* Tools & Integrations */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-16"
+        >
+          <h3 className={`text-2xl font-semibold mb-8 ${
+            theme === 'light'
+              ? 'text-slate-800'
+              : 'text-slate-200'
+          }`}>
+            Tools & Integrations
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+            {SKILLS.tools.map((skill) => (
+              <SkillIcon key={skill.name} name={skill.name} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Concepts */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="max-w-4xl mx-auto"
+        >
+          <h3 className={`text-2xl font-semibold mb-8 ${
+            theme === 'light'
+              ? 'text-slate-800'
+              : 'text-slate-200'
+          }`}>
+            Core Concepts & Methodologies
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {SKILLS.concepts.map((concept, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className={`p-4 rounded-lg flex items-center gap-3 ${
+                  theme === 'light'
+                    ? 'bg-gray-100 text-gray-700 border border-gray-300'
+                    : 'bg-gray-800/50 text-gray-300 border border-gray-700'
+                }`}
+              >
+                <span className={`text-xl font-bold ${
+                  theme === 'light'
+                    ? 'text-slate-700'
+                    : 'text-slate-400'
+                }`}>✓</span>
+                <span className="font-medium">{concept}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }
