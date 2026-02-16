@@ -1,7 +1,31 @@
 import { motion } from "framer-motion";
 import { SKILLS } from "../lib/constants";
 import { useTheme } from "../lib/theme-context";
-import { SiReact, SiSvelte, SiJavascript, SiTypescript, SiTailwindcss, SiHtml5, SiNodedotjs, SiExpress, SiPostgresql, SiMongodb, SiSupabase, SiPostman, SiGithub, SiServicenow, SiJira, SiGit, SiVmware, SiC } from "react-icons/si";
+import { SiReact, SiSvelte, SiJavascript, SiTypescript, SiExpress, SiPostgresql, SiMongodb, SiSupabase, SiPostman, SiGithub, SiJira, SiGit, SiVmware, SiC } from "react-icons/si";
+import { Settings } from "lucide-react";
+
+// Brand colors for each skill
+const skillColors: Record<string, string> = {
+  "React.js": "#61DAFB",
+  "Svelte": "#FF3E00",
+  "SvelteKit": "#FF3E00",
+  "JavaScript": "#F7DF1E",
+  "TypeScript": "#3178C6",
+  "Express.js": "#000000",
+  "PostgreSQL": "#336791",
+  "SQL": "#336791",
+  "MongoDB": "#13AA52",
+  "Supabase": "#3ECF8E",
+  "Postman": "#FF6C37",
+  "Git": "#F1502F",
+  "GitHub": "#181717",
+  "ServiceNow": "#00A4EF",
+  "Jira Service Management": "#0052CC",
+  "JIRA": "#0052CC",
+  "VMware": "#607078",
+  "C": "#A8B9CC",
+  "GoHighLevel": "#5D5DFF",
+};
 
 const skillIcons: Record<string, React.ReactNode> = {
   "React.js": <SiReact />,
@@ -9,9 +33,6 @@ const skillIcons: Record<string, React.ReactNode> = {
   "SvelteKit": <SiSvelte />,
   "JavaScript": <SiJavascript />,
   "TypeScript": <SiTypescript />,
-  "Tailwind CSS": <SiTailwindcss />,
-  "HTML5": <SiHtml5 />,
-  "Node.js": <SiNodedotjs />,
   "Express.js": <SiExpress />,
   "PostgreSQL": <SiPostgresql />,
   "SQL": <SiPostgresql />,
@@ -20,11 +41,11 @@ const skillIcons: Record<string, React.ReactNode> = {
   "Postman": <SiPostman />,
   "Git": <SiGit />,
   "GitHub": <SiGithub />,
-  "ServiceNow": <SiServicenow />,
+  "ServiceNow": <Settings />,
   "Jira Service Management": <SiJira />,
   "JIRA": <SiJira />,
   "VMware": <SiVmware />,
-  "GoHighLevel": <SiGit />,
+  "GoHighLevel": <SiGithub />,
   "C": <SiC />,
 };
 
@@ -39,11 +60,10 @@ export default function Skills() {
       whileHover={{ scale: 1.1 }}
       className="flex flex-col items-center gap-2"
     >
-      <div className={`text-5xl transition-colors ${
-        theme === 'light'
-          ? 'text-slate-700 hover:text-slate-900'
-          : 'text-slate-400 hover:text-slate-200'
-      }`}>
+      <div 
+        className="text-5xl transition-opacity hover:opacity-80"
+        style={{ color: skillColors[name] || '#666666' }}
+      >
         {skillIcons[name] || <span>•</span>}
       </div>
       <span className={`text-xs font-medium text-center ${
@@ -189,11 +209,10 @@ export default function Skills() {
                 }`}
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className={`text-4xl ${
-                    theme === 'light'
-                      ? 'text-slate-700'
-                      : 'text-slate-400'
-                  }`}>
+                  <div 
+                    className="text-4xl"
+                    style={{ color: skillColors[platform.name] || '#666666' }}
+                  >
                     {skillIcons[platform.name] || <span>•</span>}
                   </div>
                   <div>
@@ -260,7 +279,7 @@ export default function Skills() {
               ? 'text-slate-800'
               : 'text-slate-200'
           }`}>
-            Core Concepts & Methodologies
+            Concepts
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {SKILLS.concepts.map((concept, idx) => (

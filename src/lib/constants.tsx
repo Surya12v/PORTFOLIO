@@ -12,7 +12,7 @@ export const PROFESSIONAL_SUMMARY = {
   description: "I specialize in full-stack web development using React, Svelte, Node.js, and modern databases like PostgreSQL and Supabase. My expertise includes REST API development, platform integration, workflow management, and ServiceNow ITOM implementation. I excel at migrating and custom building solutions, managing relational databases, and creating robust integrations between CRM platforms and web applications.",
   location: "Tirupur, Tamil Nadu, India",
   email: "suryavelraj0309@gmail.com",
-  phone: "+91 9884430309",
+  phone: "+91 9994615264",
   github: "https://github.com/Surya12v",
   linkedin: "https://www.linkedin.com/in/surya-v-05729126a/",
   resume: "/suryavRESUME.pdf"
@@ -23,9 +23,9 @@ export const SKILLS = {
   languages: [
     { name: "JavaScript", icon: "SiJavascript" },
     { name: "TypeScript", icon: "SiTypescript" },
+    { name: "C", icon: "SiC" },
     { name: "PostgreSQL", icon: "SiPostgresql" },
     { name: "SQL", icon: "SiPostgresql" },
-    { name: "C", icon: "SiC" },
   ],
   frameworks: [
     { name: "React.js", icon: "SiReact" },
@@ -38,25 +38,25 @@ export const SKILLS = {
     { name: "Supabase", icon: "SiSupabase" },
   ],
   platforms: [
-    { 
+    {
       name: "ServiceNow",
-      details: ["ITOM Discovery", "ACC-M", "MID Server", "Script Includes", "Client Scripts", "ITSM"],
-      icon: "SiServicenow"
+      icon: "SiServicenow",
+      details: ["ITOM Discovery", "ACC-M", "MID Server", "Script Includes", "Client Scripts", "ITSM"]
     },
-    { 
+    {
       name: "Jira Service Management",
-      details: ["Request Types", "Custom Workflows", "Automation", "Kanban Board Configuration"],
-      icon: "SiJira"
+      icon: "SiJira",
+      details: ["Request types", "Custom workflows", "Automation", "Kanban board configuration"]
     },
-    { 
+    {
       name: "VMware",
-      details: ["Virtual Machine Provisioning", "System Monitoring"],
-      icon: "SiVmware"
+      icon: "SiVmware",
+      details: ["Virtual machine provisioning", "System monitoring"]
     },
-    { 
+    {
       name: "GoHighLevel",
-      details: ["Workflow", "API Integration"],
-      icon: "SiGit"
+      icon: "SiGithub",
+      details: ["Workflow", "API integration"]
     },
   ],
   tools: [
@@ -64,13 +64,13 @@ export const SKILLS = {
     { name: "Postman", icon: "SiPostman" },
     { name: "JIRA", icon: "SiJira" },
     { name: "ServiceNow", icon: "SiServicenow" },
-    { name: "GoHighLevel", icon: "SiGit" },
+    { name: "GitHub", icon: "SiGithub" },
   ],
   concepts: [
     "RESTful APIs",
     "Webhooks",
     "Agile Methodology",
-    "ITIL Framework",
+    "ITIL Framework"
   ]
 };
 

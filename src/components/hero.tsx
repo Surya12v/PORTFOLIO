@@ -4,11 +4,30 @@ import { motion } from "framer-motion";
 import { PROFESSIONAL_SUMMARY } from "../lib/constants";
 import { ArrowRight, Download } from "lucide-react";
 import { useTheme } from "../lib/theme-context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useScroll } from "../hooks/use-scroll";
 
 export default function Hero() {
   const { theme } = useTheme();
+  const { scrollY } = useScroll();
   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  const [prevScrollY, setPrevScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down" | null>(null);
+
+  useEffect(() => {
+    if (scrollY > prevScrollY) {
+      setScrollDirection("down");
+    } else if (scrollY < prevScrollY) {
+      setScrollDirection("up");
+    }
+    setPrevScrollY(scrollY);
+  }, [scrollY, prevScrollY]);
+
+  // Calculate water fill height based on scroll position
+  // Water fills upward when scrolling down (0 to 100%)
+  // Water fills downward when scrolling up
+  const heroHeight = 800;
+  const waterFillPercentage = Math.min((scrollY / (heroHeight * 0.5)) * 100, 100);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -63,6 +82,42 @@ export default function Hero() {
             backgroundSize: '400% 400%',
           }}
         />
+
+        {/* Water Fill Animation */}
+        <div className="absolute bottom-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+          <motion.div
+            className={`absolute bottom-0 left-0 w-full transition-all duration-700 ${
+              theme === 'light'
+                ? 'bg-gradient-to-t from-cyan-400/40 to-cyan-300/20'
+                : 'bg-gradient-to-t from-cyan-500/30 to-cyan-400/10'
+            }`}
+            style={{
+              height: `${waterFillPercentage}%`,
+            }}
+          >
+            {/* Animated Wave inside water fill */}
+            <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 80" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor={theme === 'light' ? '#06b6d4' : '#06b6d4'} stopOpacity="0.6" />
+                  <stop offset="100%" stopColor={theme === 'light' ? '#0891b2' : '#155e75'} stopOpacity="0.9" />
+                </linearGradient>
+              </defs>
+              <motion.path
+                d="M0,40 Q180,20 360,40 T720,40 T1080,40 T1440,40 L1440,80 L0,80 Z"
+                fill="url(#waterGradient)"
+                animate={{
+                  d: scrollDirection === "down"
+                    ? ['M0,40 Q180,20 360,40 T720,40 T1080,40 T1440,40 L1440,80 L0,80 Z', 
+                       'M0,50 Q180,30 360,50 T720,50 T1080,50 T1440,50 L1440,80 L0,80 Z']
+                    : ['M0,50 Q180,30 360,50 T720,50 T1080,50 T1440,50 L1440,80 L0,80 Z', 
+                       'M0,40 Q180,20 360,40 T720,40 T1080,40 T1440,40 L1440,80 L0,80 Z']
+                }}
+                transition={{ duration: 3, ease: "easeInOut" }}
+              />
+            </svg>
+          </motion.div>
+        </div>
 
         {/* Large Animated Blob 1 */}
         <motion.div
