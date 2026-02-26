@@ -137,7 +137,7 @@ export default function Experience() {
                 theme === 'light'
                   ? 'text-cyan-700'
                   : 'text-cyan-400'
-              }`}>3+ years</span> of web development experience
+              }`}>1.5+ years</span> of web development experience
             </p>
           </div>
         </motion.div>
